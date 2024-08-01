@@ -1,0 +1,16 @@
+spring:
+    application:
+        name: BackCrud
+    jpa:
+        database: postgresql
+        show-sql: true
+        hibernate:
+            ddl-auto: create
+    datasource:
+        url: jdbc:postgresql://localhost:5432/db_crudAlumnos
+        username: postgres
+        password: 1234
+        driverClassName: org.postgresql.Driver
+    sql:
+        init:
+            platform: postgres
