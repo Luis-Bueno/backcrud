@@ -5,7 +5,7 @@ spring:
         database: postgresql
         show-sql: true
         hibernate:
-            ddl-auto: create
+            ddl-auto: update
     datasource:
         url: jdbc:postgresql://localhost:5432/db_crudAlumnos
         username: postgres
