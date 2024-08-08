@@ -12,9 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO implements Serializable {
-
     private int id;
     private String username;
     private String email;
-    
 }
