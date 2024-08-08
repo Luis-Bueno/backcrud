@@ -1,7 +1,4 @@
 package com.backcrud.backcrud.dto;
-
-import java.io.Serializable;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,10 +8,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO implements Serializable {
+public class UserRequest {
 
-    private int id;
-    private String username;
-    private String email;
+    int id;
+    String username;
+    String email;
     
 }

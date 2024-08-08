@@ -28,11 +28,11 @@ import lombok.NoArgsConstructor;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    public int id;
     @Column(nullable = false)
-    private String username;
+    public String username;
     private String password;
-    private String email;
+    public String email;
     private UserRol rol;
 
     @Override
