@@ -31,8 +31,8 @@ public class SecurityConfig {
             .authorizeHttpRequests(authRequest ->
               authRequest
                 .requestMatchers(HttpMethod.GET).permitAll()
-                .requestMatchers(HttpMethod.POST).permitAll() //Solo para pruebas rapidas
-                .requestMatchers(HttpMethod.DELETE).permitAll() //Solo para pruebas rapidas
+                //.requestMatchers(HttpMethod.POST).permitAll() //Solo para pruebas rapidas
+                //.requestMatchers(HttpMethod.DELETE).permitAll() //Solo para pruebas rapidas
                 .requestMatchers(HttpMethod.OPTIONS).permitAll()
                 .requestMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated()
