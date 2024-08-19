@@ -1,5 +1,8 @@
 package com.backcrud.backcrud.controller;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.backcrud.backcrud.dto.UserDTO;
 import com.backcrud.backcrud.dto.UserRequest;
 import com.backcrud.backcrud.dto.UserResponse;
+import com.backcrud.backcrud.entity.User;
 import com.backcrud.backcrud.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,7 +28,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequiredArgsConstructor
 public class UserController {
     @Autowired
-    UserService userService;
+    UserService userService; 
+
+    @GetMapping("/all")
+    public List<User> getUsers() {
+        return userService.getAllUsers();
+    }
     
     @GetMapping(path = "/{id}")
     public ResponseEntity<Object> getUser(@PathVariable("id") int id) {
@@ -34,6 +43,13 @@ public class UserController {
         }
         return ResponseEntity.ok(userDTO);
     }
+
+    @GetMapping
+    public UserDTO getUserByEmail(@RequestBody String email) {
+        System.out.println(email);
+        return userService.getByEmail(email);
+    }
+    
 
     @PutMapping()
     public ResponseEntity<UserResponse> updateUser(@RequestBody UserRequest userRequest){

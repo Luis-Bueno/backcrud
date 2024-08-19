@@ -7,10 +7,13 @@ spring:
         hibernate:
             ddl-auto: update
     datasource:
-        url: jdbc:postgresql://localhost:5432/db_crudAlumnos
+        url: jdbc:postgresql://localhost:5432/db_crudAlumnosv2
         username: postgres
         password: 1234
         driverClassName: org.postgresql.Driver
     sql:
         init:
             platform: postgres
+jwtKeys:
+    privateKeyPath: jwtKeys/private.key.pem
+    publicKeypath: jwtKeys/public.key.pem
