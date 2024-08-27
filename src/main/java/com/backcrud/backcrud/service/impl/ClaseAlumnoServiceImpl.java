@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.backcrud.backcrud.entity.ClaseAlumno;
+import com.backcrud.backcrud.exeptionHandler.dto.RestResponse;
 import com.backcrud.backcrud.repository.ClaseAlumnoRepository;
 import com.backcrud.backcrud.service.ClaseAlumnoService;
 
@@ -19,29 +20,41 @@ public class ClaseAlumnoServiceImpl implements ClaseAlumnoService {
     @Override
     public Optional<ClaseAlumno> getClaseAlummnoById(Integer id) {
         if  (claseAlumnoRepository.existsById(id)){
-            message = ("El Alummno se ha encontrado");
+            message = ("La Relacion se ha encontrado");
             return claseAlumnoRepository.findById(id);
         }
-        message = ("El Alummno no se ha encontrado");
+        message = ("La Relacion no se ha encontrado");
         return null;
     }
 
     @Override
-    public String saveOrUpdate(ClaseAlumno alumno) {
+    public RestResponse saveOrUpdate(ClaseAlumno alumno) {
         claseAlumnoRepository.save(alumno);
         if (claseAlumnoRepository.existsById(alumno.getId())){
-            return ("ClaseAlumno Guardado Correctamente");
+                RestResponse restResponse = RestResponse.builder()
+                    .message("Guardado Correctamente")
+                    .build();
+                return restResponse;
+            }
+            RestResponse restResponse = RestResponse.builder()
+                .message("Hubo un error en el guardado, pruebalo de nuevo")
+                .build();
+            return restResponse;
         }
-        return ("Hubo un error en el guardado, pruebalo de nuevo");
-    }
 
     @Override
-    public String deleteById(Integer id) {
+    public RestResponse deleteById(Integer id) {
         claseAlumnoRepository.deleteById(id);
         if (!claseAlumnoRepository.existsById(id)){
-            return ("ClaseAlumno Se Borro Correctamente");
+            RestResponse restResponse = RestResponse.builder()
+                .message("Se Borro Correctamente")
+                .build();
+            return restResponse;
         }
-        return ("Hubo un error en el borrado, pruebalo de nuevo");
+        RestResponse restResponse = RestResponse.builder()
+            .message("Hubo un error en el borrado, pruebalo de nuevo")
+            .build();
+        return restResponse;
     }
 
     @Override

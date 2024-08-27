@@ -5,12 +5,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 @Entity
 @Data
 @RequiredArgsConstructor
+@Builder
 @Table (name = "cat_alumno")
 public class Alumno {
 
@@ -18,5 +20,8 @@ public class Alumno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nombre; 
+
+    public Alumno(int i, String string) {
+    }
     
 }

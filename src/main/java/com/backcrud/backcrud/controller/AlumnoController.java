@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backcrud.backcrud.entity.Alumno;
+import com.backcrud.backcrud.exeptionHandler.dto.RestResponse;
 import com.backcrud.backcrud.service.AlumnoService;
 
 import lombok.RequiredArgsConstructor;
@@ -39,14 +40,12 @@ public class AlumnoController {
     }
 
     @PostMapping
-    public String saveOrUpdate(@RequestBody Alumno alumno){
-        alumnoService.saveOrUpdate(alumno);
+    public RestResponse saveOrUpdate(@RequestBody Alumno alumno){
         return(alumnoService.saveOrUpdate(alumno));
     }
     
     @DeleteMapping("{id}")
-    public String delete(@PathVariable("id") Integer id){
-        alumnoService.deleteById(id);
+    public RestResponse delete(@PathVariable("id") Integer id){
         return(alumnoService.deleteById(id));
     }
     

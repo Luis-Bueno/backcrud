@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backcrud.backcrud.entity.Clase;
+import com.backcrud.backcrud.exeptionHandler.dto.RestResponse;
 import com.backcrud.backcrud.service.ClaseService;
 
 import lombok.RequiredArgsConstructor;
@@ -38,13 +39,13 @@ public class ClaseController {
     }
 
     @PostMapping
-    public String saveOrUpdate(@RequestBody Clase clase){
+    public RestResponse saveOrUpdate(@RequestBody Clase clase){
         claseService.saveOrUpdate(clase);
         return(claseService.saveOrUpdate(clase));
     }
     
     @DeleteMapping("{id}")
-    public String delete(@PathVariable("id") Integer id){
+    public RestResponse delete(@PathVariable("id") Integer id){
         claseService.deleteById(id);
         return(claseService.deleteById(id));
     }
