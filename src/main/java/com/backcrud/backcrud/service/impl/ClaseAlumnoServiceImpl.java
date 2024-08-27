@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.backcrud.backcrud.entity.ClaseAlumno;
+import com.backcrud.backcrud.exeptionhandler.InternalException;
+import com.backcrud.backcrud.exeptionhandler.NotFoundException;
+import com.backcrud.backcrud.exeptionhandler.OKException;
+import com.backcrud.backcrud.exeptionhandler.dto.RestResponse;
 import com.backcrud.backcrud.repository.ClaseAlumnoRepository;
 import com.backcrud.backcrud.service.ClaseAlumnoService;
 
@@ -17,31 +21,30 @@ public class ClaseAlumnoServiceImpl implements ClaseAlumnoService {
     ClaseAlumnoRepository claseAlumnoRepository;
 
     @Override
-    public Optional<ClaseAlumno> getClaseAlummnoById(Integer id) {
+    public Optional<ClaseAlumno> getClaseAlummnoById(Integer id) throws NotFoundException {
         if  (claseAlumnoRepository.existsById(id)){
-            message = ("El Alummno se ha encontrado");
+            message = ("La Relacion se ha encontrado");
             return claseAlumnoRepository.findById(id);
         }
-        message = ("El Alummno no se ha encontrado");
-        return null;
+        throw new NotFoundException("La Relacion no se ha encontrado");
     }
 
     @Override
-    public String saveOrUpdate(ClaseAlumno alumno) {
+    public RestResponse saveOrUpdate(ClaseAlumno alumno) throws OKException, InternalException {
         claseAlumnoRepository.save(alumno);
         if (claseAlumnoRepository.existsById(alumno.getId())){
-            return ("ClaseAlumno Guardado Correctamente");
+                    throw new OKException("Guardado Correctamente");
+            }
+                throw new InternalException("Hubo un error en el guardado, pruebalo de nuevo");
         }
-        return ("Hubo un error en el guardado, pruebalo de nuevo");
-    }
 
     @Override
-    public String deleteById(Integer id) {
+    public RestResponse deleteById(Integer id) throws OKException, InternalException {
         claseAlumnoRepository.deleteById(id);
         if (!claseAlumnoRepository.existsById(id)){
-            return ("ClaseAlumno Se Borro Correctamente");
+                throw new OKException("Se Borro Correctamente");
         }
-        return ("Hubo un error en el borrado, pruebalo de nuevo");
+            throw new InternalException("Hubo un error en el borrado, pruebalo de nuevo");
     }
 
     @Override

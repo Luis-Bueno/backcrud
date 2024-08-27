@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backcrud.backcrud.entity.Alumno;
+import com.backcrud.backcrud.exeptionhandler.ConflictException;
+import com.backcrud.backcrud.exeptionhandler.InternalException;
+import com.backcrud.backcrud.exeptionhandler.NotFoundException;
+import com.backcrud.backcrud.exeptionhandler.OKException;
+import com.backcrud.backcrud.exeptionhandler.dto.RestResponse;
 import com.backcrud.backcrud.service.AlumnoService;
 
 import lombok.RequiredArgsConstructor;
@@ -34,20 +39,19 @@ public class AlumnoController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Alumno> getById(@PathVariable("id") Integer id){
-        return alumnoService.getAlummnoById(id);
+    public Optional<Alumno> getById(@PathVariable("id") Integer id) throws NotFoundException, OKException{
+        return alumnoService.getAlumnoById(id);
     }
 
     @PostMapping
-    public String saveOrUpdate(@RequestBody Alumno alumno){
-        alumnoService.saveOrUpdate(alumno);
+    public RestResponse saveOrUpdate(@RequestBody Alumno alumno) throws InternalException, OKException{
         return(alumnoService.saveOrUpdate(alumno));
     }
     
     @DeleteMapping("{id}")
-    public String delete(@PathVariable("id") Integer id){
+    public void delete(@PathVariable("id") Integer id) throws ConflictException, OKException, InternalException{
         alumnoService.deleteById(id);
-        return(alumnoService.deleteById(id));
+        return;
     }
     
 }

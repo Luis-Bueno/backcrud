@@ -1,16 +1,14 @@
-package com.backcrud.backcrud.auth;
+package com.backcrud.backcrud.exeptionhandler.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
 @Data
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor
-public class AuthResponse {
-
-    String token;
-    
+@AllArgsConstructor
+public class RestResponse{
+    private String message;
 }

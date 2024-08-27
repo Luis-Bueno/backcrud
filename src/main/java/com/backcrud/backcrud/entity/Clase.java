@@ -19,4 +19,6 @@ public class Clase {
     private int id;
     private String materia;
     
+    public Clase(int id, String materia) {
+    }
 }
